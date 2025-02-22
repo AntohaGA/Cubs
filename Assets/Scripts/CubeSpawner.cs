@@ -5,6 +5,8 @@ public class CubeSpawner : MonoBehaviour
 {
     private ClickerOnCube _clickerOnCube;
 
+    [SerializeField] private CreatorCube newCube;
+
     private void Awake()
     {
         _clickerOnCube = GetComponent<ClickerOnCube>();
@@ -27,18 +29,16 @@ public class CubeSpawner : MonoBehaviour
 
         Vector3 PositionNewCubes = new (0, 3, 0);
 
-        GameObject newCube;
-
         if (GetComponent<CounterChanceToDivide>().IsMakeCubes())
         {
             CountNewCubes = Random.Range(MinNewCubs, MaxNewCubs);
 
             for (int i = 0; i < CountNewCubes; i++)
             {
-                newCube = Instantiate(gameObject, PositionNewCubes, Quaternion.identity);
+                newCube = Instantiate(newCube, PositionNewCubes, Quaternion.identity);
                 newCube.GetComponent<CounterChanceToDivide>().Chance = GetComponent<CounterChanceToDivide>().Chance / DecrimentorChance;
                 newCube.transform.localScale = transform.localScale / DecrimentorScale;
-                newCube.GetComponent<Renderer>().material.SetColor("_Color", Random.ColorHSV());
+                newCube.GetComponent<ColorChanger>().ChangeToRandomColor();
             }
         }
 
