@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Destroyer : MonoBehaviour
@@ -5,18 +6,20 @@ public class Destroyer : MonoBehaviour
     [SerializeField] private float _explosionRadius;
     [SerializeField] private float _explosionForce;
 
-    private void OnMouseUpAsButton()
+    public void Explode()
     {
-        GetComponent<SpawnerCubs>().AddCubesByChance();
-        Explode();
-        Destroy(gameObject);
-    }
+        Collider[] colliders = Physics.OverlapSphere(transform.position, _explosionRadius);
 
-    private void Explode()
-    {
-        foreach (GameObject cube in GameObject.FindGameObjectsWithTag("Cub"))
+        List<Rigidbody> rigidbodies = new ();
+
+        foreach (Collider collider in colliders)
         {
-            cube.GetComponent<Rigidbody>().AddExplosionForce(_explosionForce, transform.position, _explosionRadius);
+           if( collider.TryGetComponent(out Rigidbody rigidbody))
+            {
+                rigidbody.AddExplosionForce(_explosionForce, transform.position, _explosionRadius);
+            }
         }
+
+        Destroy(gameObject);
     }
 }

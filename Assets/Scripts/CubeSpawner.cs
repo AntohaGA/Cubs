@@ -1,7 +1,21 @@
 using UnityEngine;
 
-public class SpawnerCubs : MonoBehaviour
+[RequireComponent (typeof(ClickerOnCube))]
+public class CubeSpawner : MonoBehaviour
 {
+    private ClickerOnCube _clickerOnCube;
+
+    private void Awake()
+    {
+        _clickerOnCube = GetComponent<ClickerOnCube>();
+        _clickerOnCube.OnClicked += AddCubesByChance;
+    }
+
+    private void OnDisable()
+    {
+        _clickerOnCube.OnClicked -= AddCubesByChance;
+    }
+
     public void AddCubesByChance()
     {
         const int MinNewCubs = 2;
@@ -27,5 +41,7 @@ public class SpawnerCubs : MonoBehaviour
                 newCube.GetComponent<Renderer>().material.SetColor("_Color", Random.ColorHSV());
             }
         }
+
+        GetComponent<Destroyer>().Explode();
     }
 }
