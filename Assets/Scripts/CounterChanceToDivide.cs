@@ -8,7 +8,6 @@ public class CounterChanceToDivide : MonoBehaviour
     {
         Chance = 100;
     }
-
     public bool IsMakeCubes()
     {
         const int minProcent = 0;
