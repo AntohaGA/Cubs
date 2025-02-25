@@ -7,9 +7,9 @@ public class ClickerOnCube : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if(TryGetComponent(out Cube component))
+        if(TryGetComponent(out Cube cube))
         {
-            OnClicked?.Invoke(component);
+            OnClicked?.Invoke(cube);
         }
     }
 }

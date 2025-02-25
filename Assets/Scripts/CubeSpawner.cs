@@ -4,19 +4,19 @@ public class CubeSpawner : MonoBehaviour
 {
     [SerializeField] private Cube _cubePrefab;
 
-    Vector3 PositionNewCubes = new(0, 2, 0);
-
     private void Awake()
     {
         const int StartCountCubes = 5;
 
-        Cube cube;
+        Cube startCube;
 
-        for(int i =0; i < StartCountCubes; i++)
+        Vector3 positionNewCubes = new(0, 2, 0);
+
+        for (int i =0; i < StartCountCubes; i++)
         {
-            cube = Instantiate(_cubePrefab, PositionNewCubes, Quaternion.identity);
+            startCube = Instantiate(_cubePrefab, positionNewCubes, Quaternion.identity);
 
-            if (cube.TryGetComponent(out ClickerOnCube component))
+            if (startCube.TryGetComponent(out ClickerOnCube component))
             {
                 component.OnClicked += AddCubesByChance;
             }
@@ -29,28 +29,25 @@ public class CubeSpawner : MonoBehaviour
         const int MaxNewCubs = 6;
         const int DecrimentorScale = 2;
 
-        float oldChance;
-
         int countNewCubes;
 
         Cube newCube;
 
-        if (clickCube.GetComponent<CounterChanceDivide>().IsMakeCubes())
+        if (clickCube.IsDivide())
         {
             countNewCubes = Random.Range(MinNewCubs, MaxNewCubs);
 
             for (int i = 0; i < countNewCubes; i++)
-            {
-                newCube = Instantiate(clickCube, clickCube.transform.position, clickCube.transform.rotation);
+            {               
+                newCube = Instantiate(clickCube);
                 newCube.GetComponent<ClickerOnCube>().OnClicked += AddCubesByChance;
                 newCube.transform.localScale /= DecrimentorScale;
-                newCube.GetComponent<ColorChanger>().ChangeToRandomColor();
-
-                oldChance = clickCube.GetComponent<CounterChanceDivide>().Chance;
-                newCube.GetComponent<CounterChanceDivide>().DecrimentChance(oldChance);
+                newCube.ChangeColor();
+                newCube.SetNewChanceDivide(clickCube.Chance);
+                newCube.Explode();
             }
         }
 
-        clickCube.GetComponent<Destroyer>().Explode();
+        clickCube.Destroy();
     }
 }
