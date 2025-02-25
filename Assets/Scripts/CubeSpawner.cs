@@ -35,8 +35,6 @@ public class CubeSpawner : MonoBehaviour
 
         Cube newCube;
 
-        Vector3 positionNewCubes = new (0, 2, 0);
-
         if (clickCube.GetComponent<CounterChanceDivide>().IsMakeCubes())
         {
             countNewCubes = Random.Range(MinNewCubs, MaxNewCubs);
