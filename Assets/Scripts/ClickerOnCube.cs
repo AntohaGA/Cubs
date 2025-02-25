@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class ClickerOnCube : MonoBehaviour
 {
-    public event Action<CreatorCube> OnClicked;
+    public event Action<Cube> OnClicked;
 
     private void OnMouseDown()
     {
-        if(TryGetComponent(out CreatorCube component))
+        if(TryGetComponent(out Cube component))
         {
             OnClicked?.Invoke(component);
         }

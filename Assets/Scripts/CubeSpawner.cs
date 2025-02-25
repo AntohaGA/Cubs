@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CubeSpawner : MonoBehaviour
 {
-    [SerializeField] private CreatorCube _cubePrefab;
+    [SerializeField] private Cube _cubePrefab;
 
     Vector3 PositionNewCubes = new(0, 2, 0);
 
@@ -10,46 +10,49 @@ public class CubeSpawner : MonoBehaviour
     {
         const int StartCountCubes = 5;
 
-        CreatorCube _newCube;
+        Cube cube;
 
         for(int i =0; i < StartCountCubes; i++)
         {
-            _newCube = Instantiate(_cubePrefab, PositionNewCubes, Quaternion.identity);
+            cube = Instantiate(_cubePrefab, PositionNewCubes, Quaternion.identity);
 
-            if (_newCube.TryGetComponent(out ClickerOnCube component))
+            if (cube.TryGetComponent(out ClickerOnCube component))
             {
                 component.OnClicked += AddCubesByChance;
             }
         }
     }
 
-    public void AddCubesByChance(CreatorCube creatorCube)
+    public void AddCubesByChance(Cube clickCube)
     {
         const int MinNewCubs = 2;
         const int MaxNewCubs = 6;
         const int DecrimentorScale = 2;
-        const int DecrimentorChance = 2;
 
-        int CountNewCubes;
+        float oldChance;
 
-        CreatorCube _newCube;
+        int countNewCubes;
 
-        Vector3 PositionNewCubes = new (0, 2, 0);
+        Cube newCube;
 
-        if (creatorCube.GetComponent<CounterChanceToDivide>().IsMakeCubes())
+        Vector3 positionNewCubes = new (0, 2, 0);
+
+        if (clickCube.GetComponent<CounterChanceDivide>().IsMakeCubes())
         {
-            CountNewCubes = Random.Range(MinNewCubs, MaxNewCubs);
+            countNewCubes = Random.Range(MinNewCubs, MaxNewCubs);
 
-            for (int i = 0; i < CountNewCubes; i++)
+            for (int i = 0; i < countNewCubes; i++)
             {
-                _newCube = Instantiate(creatorCube, creatorCube.transform.position, creatorCube.transform.rotation);
-                _newCube.GetComponent<ClickerOnCube>().OnClicked += AddCubesByChance;
-                _newCube.GetComponent<CounterChanceToDivide>().Chance = creatorCube.GetComponent<CounterChanceToDivide>().Chance/ DecrimentorChance;
-                _newCube.transform.localScale /= DecrimentorScale;
-                _newCube.GetComponent<ColorChanger>().ChangeToRandomColor();
+                newCube = Instantiate(clickCube, clickCube.transform.position, clickCube.transform.rotation);
+                newCube.GetComponent<ClickerOnCube>().OnClicked += AddCubesByChance;
+                newCube.transform.localScale /= DecrimentorScale;
+                newCube.GetComponent<ColorChanger>().ChangeToRandomColor();
+
+                oldChance = clickCube.GetComponent<CounterChanceDivide>().Chance;
+                newCube.GetComponent<CounterChanceDivide>().DecrimentChance(oldChance);
             }
         }
 
-        creatorCube.GetComponent<Destroyer>().Explode();
+        clickCube.GetComponent<Destroyer>().Explode();
     }
 }
