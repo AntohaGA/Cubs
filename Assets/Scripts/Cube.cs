@@ -2,9 +2,6 @@ using UnityEngine;
 
 public class Cube : MonoBehaviour
 {
-    [SerializeField] private float _explosionRadius;
-    [SerializeField] private float _explosionForce;
-
     public float Chance { get; private set; }
 
     private void Awake()
@@ -14,18 +11,7 @@ public class Cube : MonoBehaviour
 
     public void ChangeColor()
     {
-        if (TryGetComponent(out Renderer renderer))
-        {
-            renderer.material.SetColor("_Color", Random.ColorHSV());
-        }
-    }
-
-    public void Explode()
-    {
-        if (TryGetComponent(out Rigidbody rigidbody))
-        {
-            rigidbody.AddExplosionForce(_explosionForce, transform.position, _explosionRadius);
-        }
+        GetComponent<Renderer>().material.SetColor("_Color", Random.ColorHSV());
     }
 
     public bool IsDivide()
@@ -41,9 +27,14 @@ public class Cube : MonoBehaviour
         return false;
     }
 
-    public void SetNewChanceDivide(float oldChance)
+    public void SetNewParameters(float oldChance)
     {
-        Chance = oldChance / 2;
+        const int DecrimentorScale = 2;
+        const int DecrimentorChance = 2;
+
+        Chance = oldChance / DecrimentorChance;
+        transform.localScale /= DecrimentorScale;
+        ChangeColor();
     }
 
     public void Destroy()

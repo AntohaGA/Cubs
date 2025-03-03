@@ -253,6 +253,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5080383092223697727, guid: 357462ec52e85ab45ba72ffe68ce4a2c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 24.39
+      objectReference: {fileID: 0}
+    - target: {fileID: 5080383092223697727, guid: 357462ec52e85ab45ba72ffe68ce4a2c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -9.76
       objectReference: {fileID: 0}
@@ -416,6 +420,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5080383092223697727, guid: 357462ec52e85ab45ba72ffe68ce4a2c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 21.547
+      objectReference: {fileID: 0}
+    - target: {fileID: 5080383092223697727, guid: 357462ec52e85ab45ba72ffe68ce4a2c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 9.8
       objectReference: {fileID: 0}
@@ -472,6 +480,8 @@ GameObject:
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
   - component: {fileID: 963194229}
+  - component: {fileID: 963194230}
+  - component: {fileID: 963194233}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -566,6 +576,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cubePrefab: {fileID: -9017318018084185494, guid: 8dd43e1e2f388d4498bf25ae9b5747d0, type: 3}
+--- !u!114 &963194230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32a3b1441d782524cb1f709296bcda05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _explosionRadius: 10
+  _explosionForce: 700
+--- !u!114 &963194233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88b9629a5a930c543b513cfc7fb1304e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1183957922
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -589,6 +625,10 @@ PrefabInstance:
     - target: {fileID: 4524651098984259537, guid: 357462ec52e85ab45ba72ffe68ce4a2c, type: 3}
       propertyPath: m_LayerOverridePriority
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5080383092223697727, guid: 357462ec52e85ab45ba72ffe68ce4a2c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 22.193
       objectReference: {fileID: 0}
     - target: {fileID: 5080383092223697727, guid: 357462ec52e85ab45ba72ffe68ce4a2c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -662,6 +702,10 @@ PrefabInstance:
     - target: {fileID: 4524651098984259537, guid: 357462ec52e85ab45ba72ffe68ce4a2c, type: 3}
       propertyPath: m_LayerOverridePriority
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5080383092223697727, guid: 357462ec52e85ab45ba72ffe68ce4a2c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 22.108
       objectReference: {fileID: 0}
     - target: {fileID: 5080383092223697727, guid: 357462ec52e85ab45ba72ffe68ce4a2c, type: 3}
       propertyPath: m_LocalPosition.x
