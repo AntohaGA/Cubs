@@ -1,28 +1,9 @@
 using UnityEngine;
 
-[RequireComponent(typeof(ClickerOnCubes))]
 public class Exploder : MonoBehaviour
 {
     [SerializeField] private int _explosionRadius;
     [SerializeField] private int _explosionForce;
-
-    private ClickerOnCubes _clicker;
-
-    private void Awake()
-    {
-        _clicker = GetComponent<ClickerOnCubes>();
-        _clicker.ClickOnCube += Destroy;
-    }
-
-    private void OnDestroy()
-    {
-        _clicker.ClickOnCube -= Destroy;
-    }
-
-    public void Destroy(Cube cube)
-    {
-        cube.Destroy();
-    }
 
     public void Explode(Cube[] cubes, Cube explodeCube)
     {

@@ -9,12 +9,7 @@ public class Cube : MonoBehaviour
         Chance = 100;
     }
 
-    public void ChangeColor()
-    {
-        GetComponent<Renderer>().material.SetColor("_Color", Random.ColorHSV());
-    }
-
-    public bool IsDivide()
+    public bool CanDivide()
     {
         const int MinProcent = 0;
         const int MaxProcent = 99;
@@ -27,18 +22,17 @@ public class Cube : MonoBehaviour
         return false;
     }
 
-    public void SetNewParameters(float oldChance)
+    public void SetNewChance(float oldChance)
     {
-        const int DecrimentorScale = 2;
         const int DecrimentorChance = 2;
 
         Chance = oldChance / DecrimentorChance;
-        transform.localScale /= DecrimentorScale;
-        ChangeColor();
     }
 
-    public void Destroy()
+    public void SetNewScale()
     {
-        Destroy(gameObject);
+        const int DecrimentorScale = 2;
+
+        transform.localScale /= DecrimentorScale;
     }
 }
