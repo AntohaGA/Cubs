@@ -4,7 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(CubeSpawner))]
 [RequireComponent(typeof(Exploder))]
 [RequireComponent(typeof(ColorChanger))]
-public class CubesController : MonoBehaviour
+public class CubeDivider : MonoBehaviour
 {
     private ClickerOnCubes _clickerOnCubes;
     private CubeSpawner _cubeSpawner;
@@ -30,21 +30,19 @@ public class CubesController : MonoBehaviour
     {
         Cube[] cubes;
 
-        cubes = _cubeSpawner.DivideCube(cube);
-
-        if(cubes != null)
+        if (cube.CanDivide())
         {
+            cubes = _cubeSpawner.MakeNewCubes(cube);
             _colorChanger.ChangeColor(cubes);
 
             foreach (Cube newCube in cubes)
             {
-                newCube.SetNewChance(cube.Chance);
-                newCube.SetNewScale();
+                newCube.Init(cube.Chance);
             }
 
             _exploder.Explode(cubes, cube);
         }
 
-        Destroy(cube);
+        Destroy(cube.gameObject);
     }
 }

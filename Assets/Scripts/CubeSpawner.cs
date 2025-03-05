@@ -11,27 +11,22 @@ public class CubeSpawner : MonoBehaviour
         CreateStartCubes(StartCountCubes);
     }
 
-    public Cube[] DivideCube(Cube cube)
+    public Cube[] MakeNewCubes(Cube cube)
     {
         const int MinNewCubs = 2;
         const int MaxNewCubs = 6;
 
         int countNewCubes;
 
-        Cube[] newCubes = null;
+        Cube[] newCubes;
 
-        if (cube.CanDivide())
+        countNewCubes = Random.Range(MinNewCubs, MaxNewCubs);
+        newCubes = new Cube[countNewCubes];
+
+        for (int i = 0; i < countNewCubes; i++)
         {
-            countNewCubes = Random.Range(MinNewCubs, MaxNewCubs);
-            newCubes = new Cube[countNewCubes];
-
-            for (int i = 0; i < countNewCubes; i++)
-            {
-                newCubes[i] = Instantiate(cube);
-            }
+            newCubes[i] = CreateCube(cube);
         }
-
-        Destroy(cube.gameObject);
 
         return newCubes;
     }
@@ -42,7 +37,17 @@ public class CubeSpawner : MonoBehaviour
 
         for (int i = 0; i < count; i++)
         {
-            Instantiate(_cubePrefab, positionNewCubes, Quaternion.identity);
+            CreateCube(_cubePrefab, positionNewCubes, Quaternion.identity);
         }
+    }
+
+    private Cube CreateCube(Cube cube)
+    {
+        return Instantiate(cube);
+    }
+
+    private Cube CreateCube(Cube cube, Vector3 position, Quaternion rotation)
+    {
+        return Instantiate(cube, position, rotation);
     }
 }

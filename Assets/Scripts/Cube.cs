@@ -14,25 +14,15 @@ public class Cube : MonoBehaviour
         const int MinProcent = 0;
         const int MaxProcent = 99;
 
-        if (Random.Range(MinProcent, MaxProcent) < Chance)
-        {
-            return true;
-        }
-
-        return false;
+        return (Random.Range(MinProcent, MaxProcent) < Chance);
     }
 
-    public void SetNewChance(float oldChance)
+    public void Init(float oldChance)
     {
         const int DecrimentorChance = 2;
-
-        Chance = oldChance / DecrimentorChance;
-    }
-
-    public void SetNewScale()
-    {
         const int DecrimentorScale = 2;
 
+        Chance = oldChance / DecrimentorChance;
         transform.localScale /= DecrimentorScale;
     }
 }
