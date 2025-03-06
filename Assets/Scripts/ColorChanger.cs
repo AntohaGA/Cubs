@@ -4,9 +4,14 @@ public class ColorChanger : MonoBehaviour
 {
     public void ChangeColor(Cube[] cubes)
     {
+        const string colorProperty = "_Color";
+
+        Color newColor;
+
         foreach (Cube cube in cubes)
         {
-            cube.GetComponent<Renderer>().material.SetColor("_Color", Random.ColorHSV());
+            newColor = Random.ColorHSV();
+            cube.GetComponent<Renderer>().material.SetColor(colorProperty, newColor);
         }
     }
 }

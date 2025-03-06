@@ -37,10 +37,12 @@ public class CubeDivider : MonoBehaviour
 
             foreach (Cube newCube in cubes)
             {
-                newCube.Init(cube.Chance);
+                newCube.Init(cube.Chance, cube.ExplodeForse);
             }
-
-            _exploder.Explode(cubes, cube);
+        }
+        else
+        {
+            _exploder.Explode(cube);
         }
 
         Destroy(cube.gameObject);

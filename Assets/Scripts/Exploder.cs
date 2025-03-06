@@ -1,18 +1,27 @@
+using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(FinderObjects))]
 public class Exploder : MonoBehaviour
 {
     [SerializeField] private int _explosionRadius;
-    [SerializeField] private int _explosionForce;
 
-    public void Explode(Cube[] cubes, Cube explodeCube)
+    private FinderObjects _finderObjects;
+
+    private void Awake()
     {
-        foreach (Cube cube in cubes)
+        _finderObjects = GetComponent<FinderObjects>();
+    }
+
+    public void Explode(Cube explodeCube)
+    {
+        List<Rigidbody> explodableObjects = new();
+
+        explodableObjects = _finderObjects.FindExplodableObjectsInArea(explodeCube.transform.position, _explosionRadius);
+
+        foreach (Rigidbody cube in explodableObjects)
         {
-            if (cube.TryGetComponent(out Rigidbody rigidbody))
-            {
-                rigidbody.AddExplosionForce(_explosionForce, explodeCube.transform.position, _explosionRadius);
-            }
+            cube.AddExplosionForce(explodeCube.ExplodeForse, explodeCube.transform.position, _explosionRadius);
         }
     }
 }
