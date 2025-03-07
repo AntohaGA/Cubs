@@ -5,18 +5,18 @@ public class ClickerOnCubes : MonoBehaviour
 {
     public event Action<Cube> CubeCliked;
 
-    private Camera mainCamera;
+    private Camera _mainCamera;
 
     private void Awake()
     {
-        mainCamera = Camera.main;
+        _mainCamera = Camera.main;
     }
 
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+            Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
 
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
