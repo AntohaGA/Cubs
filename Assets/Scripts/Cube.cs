@@ -14,7 +14,7 @@ public class Cube : MonoBehaviour
     public bool CanDivide()
     {
         const int MinProcent = 0;
-        const int MaxProcent = 99;
+        const int MaxProcent = 98;
 
         return (Random.Range(MinProcent, MaxProcent + 1) < Chance);
     }
