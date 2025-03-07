@@ -11,7 +11,7 @@ public class ColorChanger : MonoBehaviour
         foreach (Cube cube in cubes)
         {
             newColor = Random.ColorHSV();
-            cube.GetComponent<Renderer>().material.SetColor(colorProperty, newColor);
+            cube.GetRenderer().material.SetColor(colorProperty, newColor);
         }
     }
 }

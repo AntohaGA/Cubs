@@ -16,7 +16,12 @@ public class Cube : MonoBehaviour
         const int MinProcent = 0;
         const int MaxProcent = 99;
 
-        return (Random.Range(MinProcent, MaxProcent) < Chance);
+        return (Random.Range(MinProcent, MaxProcent + 1) < Chance);
+    }
+
+    public Renderer GetRenderer()
+    {
+        return GetComponent<Renderer>();
     }
 
     public void Init(float oldChance, float oldExplodeForse)

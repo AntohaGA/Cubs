@@ -18,12 +18,12 @@ public class CubeDivider : MonoBehaviour
         _exploder = GetComponent<Exploder>();
         _colorChanger = GetComponent<ColorChanger>();
 
-        _clickerOnCubes.ClickOnCube += Divide;
+        _clickerOnCubes.CubeCliked += Divide;
     }
 
     private void OnDestroy()
     {
-        _clickerOnCubes.ClickOnCube -= Divide;
+        _clickerOnCubes.CubeCliked -= Divide;
     }
 
     private void Divide(Cube cube)
